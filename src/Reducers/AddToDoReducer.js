@@ -1,5 +1,27 @@
 import React from 'react';
 
+//pattern = 'reducer composition'
+const todo = (state, action) => {
+  switch(action.type) {
+    case 'ADD_TODO':
+      return {
+          id: action.id,
+          text: action.text,
+          completed: false
+      };
+    case 'TOGGLE_TODO':
+     if(state.id !== action.id){
+      return state;
+    }
+    return {
+      ...state,
+      completed: !state.completed
+    };
+    //default to cover any undefined actions
+    default:
+      return state;
+  }
+}
 const todos = (state = [], action) => {
   switch(action.type) {
     case 'ADD_TODO':
@@ -18,6 +40,7 @@ const todos = (state = [], action) => {
           return todo
         }
         return {
+          //all properties of original todo object copied by spread operator
           ...todo,
           completed:  !todo.completed
         };
