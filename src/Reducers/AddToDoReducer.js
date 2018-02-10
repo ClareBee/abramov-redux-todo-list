@@ -28,7 +28,7 @@ export const todos = (state = [], action) => {
       return [
         ...state,
         //reducers are normal javascript functions
-      todo(undefined, action)
+        todo(undefined, action)
       ];
     case 'TOGGLE_TODO':
     //map avoids mutation
@@ -41,3 +41,16 @@ export const todos = (state = [], action) => {
       return state;
   }
 }
+
+export const visibilityFilter =  (
+  state = 'SHOW_ALL',
+  action
+) => {
+    switch (action.type){
+      case 'SET_VISIBILITY_FILTER':
+        return action.filter;
+      default:
+        return state;
+    }
+
+};

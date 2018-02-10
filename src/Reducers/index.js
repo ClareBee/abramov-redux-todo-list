@@ -1,7 +1,6 @@
 
 import { combineReducers } from 'redux';
-import { todos } from './AddToDoReducer';
-import { visibilityFilter } from './SetVisibilityReducer';
+import { todos, visibilityFilter } from './AddToDoReducer';
 // const todoApp = (state = {}, action) => {
 //   return (
 //     todos: todos(
@@ -18,7 +17,8 @@ import { visibilityFilter } from './SetVisibilityReducer';
 //root reducer which maps state name and reducers
 //keys correspond to fields of state object
 //values are reducers that are called to update corresponding state fields
-export const todoApp = combineReducers({
+const todoApp = combineReducers({
   todos,
   visibilityFilter
 })
+export default todoApp;

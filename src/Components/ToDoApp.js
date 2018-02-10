@@ -1,9 +1,10 @@
 import React from 'react';
-import { store } from '../index';
+import store from '../index';
 
 let nextToDoId = 0;
 class ToDoApp extends React.Component {
   render(){
+    console.log(this.props)
     return(
       <React.Fragment>
         <h1>todolist</h1>
@@ -13,7 +14,7 @@ class ToDoApp extends React.Component {
           }} />
           <button onClick={() =>{
             store.dispatch({
-              type: 'ADD_TO',
+              type: 'ADD_TODO',
               text: this.input.value,
               id: nextToDoId++
             });
@@ -24,7 +25,16 @@ class ToDoApp extends React.Component {
           </button>
           <ul>
             {this.props.todos.map(todo => {
-              <li key={todo.id}>
+              return <li key={todo.id}
+                  onClick={() => {
+                    store.dispatch({
+                      type: 'TOGGLE_TODO',
+                      id: todo.id
+                    });
+                  }}
+                    style={{
+                      textDecoration: todo.completed ? 'line-through' : 'none'
+                  }}>
                 {todo.text}
               </li>
             })}
