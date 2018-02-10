@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux';
-import todos from './AddToDoReducer';
-import visibilityFilter from './SetVsibilityReducer';
+import { todos } from './AddToDoReducer';
+import { visibilityFilter } from './SetVisibilityReducer';
 // const todoApp = (state = {}, action) => {
 //   return (
 //     todos: todos(
