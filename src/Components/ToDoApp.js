@@ -1,4 +1,5 @@
 import React from 'react';
+import { store } from '../index';
 
 let nextToDoId = 0;
 class ToDoApp extends React.Component {
@@ -7,12 +8,17 @@ class ToDoApp extends React.Component {
       <React.Fragment>
         <h1>todolist</h1>
         <div>
+          <input ref={node => {
+            this.input = node;
+          }} />
           <button onClick={() =>{
             store.dispatch({
               type: 'ADD_TO',
-              text: 'test',
+              text: this.input.value,
               id: nextToDoId++
             });
+            //empties input field after submission
+            this.input.value = '';
           }}>
           Add ToDo
           </button>
@@ -29,4 +35,4 @@ class ToDoApp extends React.Component {
   }
 }
 
-export default ToDoList;
+export default ToDoApp;

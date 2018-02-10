@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import { createStore } from 'redux';
 import registerServiceWorker from './registerServiceWorker';
 import { todoApp } from './Reducers';
+import ToDoApp from './Components/ToDoApp';
 
-const store = createStore(todoApp);
+export const store = createStore(todoApp);
 
 //will update dom in response to current application state
 const render = () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  ReactDOM.render(<ToDoApp todos={store.getState().todos}/>, document.getElementById('root'));
 registerServiceWorker();
 }
 
