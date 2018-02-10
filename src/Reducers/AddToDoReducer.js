@@ -27,24 +27,15 @@ const todos = (state = [], action) => {
     case 'ADD_TODO':
       return [
         ...state,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false
-        }
+        //reducers are normal javascript functions
+      todo(undefined, action);
       ];
     case 'TOGGLE_TODO':
-    //state shouldn't be mutated therefore use map
-      return state.map(todo => {
-        if(todo.id !== action.id){
-          return todo
-        }
-        return {
-          //all properties of original todo object copied by spread operator
-          ...todo,
-          completed:  !todo.completed
-        };
-      });
+    //map avoids mutation
+    //reducer as a javascript function can therefore call other reducers 
+
+      return state.map(t =>
+        todo(t, action));
 //for any unknown/undefined action
     default:
       return state;
