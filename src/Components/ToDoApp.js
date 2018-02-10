@@ -20,10 +20,15 @@ const getVisibleTodos = (todos, filter) => {
 }
 class ToDoApp extends React.Component {
   render(){
-    console.log(this.props)
+    //uses destructuring method to create variables from props
+    const {
+      todos,
+      visibilityFilter
+    } = this.props
+
     const visibleTodos = getVisibleTodos(
-      this.props.todos,
-      this.props.visibilityFilter
+      todos,
+      visibilityFilter
     );
     return(
       <React.Fragment>
@@ -64,17 +69,20 @@ class ToDoApp extends React.Component {
             Show:
             {' '}
             <FilterLink
-              filter='SHOW_ALL'>
+              filter='SHOW_ALL'
+              currentFilter={visibilityFilter}>
               All
             </FilterLink>
             {' '}
             <FilterLink
-              filter='SHOW_ACTIVE'>
+              filter='SHOW_ACTIVE'
+              currentFilter={visibilityFilter}>
               Active
             </FilterLink>
             {' '}
             <FilterLink
-              filter='SHOW_COMPLETED'>
+              filter='SHOW_COMPLETED'
+              currentFilter={visibilityFilter}>
               Completed
             </FilterLink>
           </p>
