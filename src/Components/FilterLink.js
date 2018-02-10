@@ -1,4 +1,6 @@
-export const FilterLink= ({
+import React from 'react';
+import store from '../index';
+export const FilterLink = ({
   filter,
   //children are the contents of the link
   children

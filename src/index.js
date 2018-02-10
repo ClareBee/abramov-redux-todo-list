@@ -10,7 +10,8 @@ const store = createStore(todoApp);
 
 //will update dom in response to current application state
 const render = () => {
-  ReactDOM.render(<ToDoApp todos={store.getState().todos}/>, document.getElementById('root'));
+  //spread operator passes down all state fields as props
+  ReactDOM.render(<ToDoApp {...store.getState()}/>, document.getElementById('root'));
 registerServiceWorker();
 }
 

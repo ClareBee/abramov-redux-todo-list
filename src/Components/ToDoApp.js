@@ -1,11 +1,30 @@
 import React from 'react';
 import store from '../index';
-import { FilterLink } from './FilterLinke';
+import { FilterLink } from './FilterLink';
 
 let nextToDoId = 0;
+
+const getVisibleTodos = (todos, filter) => {
+  switch(filter){
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_ACTIVE':
+      return todos.filter(t =>
+        !t.completed
+      );
+    case 'SHOW_COMPLETED':
+      return todos.filter(t =>
+        t.completed
+      );
+  }
+}
 class ToDoApp extends React.Component {
   render(){
     console.log(this.props)
+    const visibleTodos = getVisibleTodos(
+      this.props.todos,
+      this.props.visibilityFilter
+    );
     return(
       <React.Fragment>
         <h1>todolist</h1>
@@ -26,7 +45,7 @@ class ToDoApp extends React.Component {
           Add ToDo
           </button>
           <ul>
-            {this.props.todos.map(todo => {
+            {visibleTodos.map(todo => {
               return <li key={todo.id}
                   onClick={() => {
                     store.dispatch({
@@ -64,5 +83,7 @@ class ToDoApp extends React.Component {
     )
   }
 }
+
+
 
 export default ToDoApp;
