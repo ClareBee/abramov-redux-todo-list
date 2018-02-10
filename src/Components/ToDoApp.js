@@ -1,6 +1,7 @@
 import React from 'react';
 import store from '../index';
 import { FilterLink } from './FilterLink';
+import { ToDoList } from './ToDoList';
 
 let nextToDoId = 0;
 
@@ -49,22 +50,12 @@ class ToDoApp extends React.Component {
           }}>
           Add ToDo
           </button>
-          <ul>
-            {visibleTodos.map(todo => {
-              return <li key={todo.id}
-                  onClick={() => {
-                    store.dispatch({
-                      type: 'TOGGLE_TODO',
-                      id: todo.id
-                    });
-                  }}
-                    style={{
-                      textDecoration: todo.completed ? 'line-through' : 'none'
-                  }}>
-                {todo.text}
-              </li>
-            })}
-          </ul>
+          <ToDoList
+            todos={visibleTodos}
+            onToDoClick={id => store.dispatch({
+              type: 'TOGGLE_TODO',
+              id
+            })} />
           <p>
             Show:
             {' '}
