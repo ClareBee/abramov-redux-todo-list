@@ -1,5 +1,6 @@
 import React from 'react';
 import store from '../index';
+import { FilterLink } from './FilterLinke';
 
 let nextToDoId = 0;
 class ToDoApp extends React.Component {
@@ -13,6 +14,7 @@ class ToDoApp extends React.Component {
             this.input = node;
           }} />
           <button onClick={() =>{
+            //dispatches the add todo action - which calls the root reducer, which calls the todo reducer
             store.dispatch({
               type: 'ADD_TODO',
               text: this.input.value,
@@ -39,6 +41,24 @@ class ToDoApp extends React.Component {
               </li>
             })}
           </ul>
+          <p>
+            Show:
+            {' '}
+            <FilterLink
+              filter='SHOW_ALL'>
+              All
+            </FilterLink>
+            {' '}
+            <FilterLink
+              filter='SHOW_ACTIVE'>
+              Active
+            </FilterLink>
+            {' '}
+            <FilterLink
+              filter='SHOW_COMPLETED'>
+              Completed
+            </FilterLink>
+          </p>
         </div>
       </React.Fragment>
     )
