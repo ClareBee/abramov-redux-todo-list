@@ -3,6 +3,7 @@ import store from '../index';
 import { FilterLink } from './FilterLink';
 import { ToDoList } from './ToDoList';
 import AddToDo from './AddToDo';
+import Footer from './Footer';
 
 let nextToDoId = 0;
 
@@ -20,52 +21,35 @@ const getVisibleTodos = (todos, filter) => {
       );
   }
 }
-class ToDoApp extends React.Component {
-  render(){
-    //uses destructuring method to create variables from props
-    const {
-      todos,
-      visibilityFilter
-    } = this.props
-
-    const visibleTodos = getVisibleTodos(
-      todos,
-      visibilityFilter
-    );
-    return(
-      <React.Fragment>
-          <AddToDo />
-          <ToDoList
-            todos={visibleTodos}
-            onToDoClick={id => store.dispatch({
-              type: 'TOGGLE_TODO',
-              id
-            })} />
-          <p>
-            Show:
-            {' '}
-            <FilterLink
-              filter='SHOW_ALL'
-              currentFilter={visibilityFilter}>
-              All
-            </FilterLink>
-            {' '}
-            <FilterLink
-              filter='SHOW_ACTIVE'
-              currentFilter={visibilityFilter}>
-              Active
-            </FilterLink>
-            {' '}
-            <FilterLink
-              filter='SHOW_COMPLETED'
-              currentFilter={visibilityFilter}>
-              Completed
-            </FilterLink>
-          </p>
-        </div>
-      </React.Fragment>
-    )
-  }
+//uses destructuring method to create variables from props
+const ToDoApp = ({  todos,
+  visibilityFilter }) => {
+    <AddToDo onAddClick={text =>
+      store.dispatch({
+        type: 'ADD_TODO',
+        id: nextToDoId++,
+        text
+      })
+    }/>
+    <ToDoList
+      todos={getVisibleTodos(
+        todos,
+        visibilityFilter
+      )}
+      onToDoClick={id => store.dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      })} />
+    <Footer
+      //to highlight the active link
+      visibilityFilter={visibilityFilter}
+      onFilterClick={filter =>
+        store.dispatch({
+          type: 'SET_VISIBILITY_FILTER',
+          filter
+        })
+      }  
+    />
 }
 
 

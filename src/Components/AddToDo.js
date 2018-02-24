@@ -11,11 +11,7 @@ const AddToDo = ({onAddClick}) => {
       <button onClick={() =>{
 
         //dispatches the add todo action - which calls the root reducer, which calls the todo reducer
-        store.dispatch({
-          type: 'ADD_TODO',
-          id: nextToDoId++,
-          text
-        });
+  
         //empties input field after submission
         onAddClick(input.value)
         input.value = '';

@@ -5,7 +5,8 @@ export const FilterLink = ({
   //currentFilter shows which filter has been selected and styles conditionally
   currentFilter,
   //children are the contents of the link
-  children
+  children,
+  onClick
 }) => {
   //if filter matches the chosen filter, then an unclickable span is rendered rather than an a-tag
   if(filter === currentFilter){
@@ -14,10 +15,7 @@ export const FilterLink = ({
   return (<a href='#'
           onClick={e => {
             e.preventDefault();
-            store.dispatch({
-              type: 'SET_VISIBILITY_FILTER',
-              filter
-            });
+            onClick(filter)
           }}>
           {children}
         </a>
