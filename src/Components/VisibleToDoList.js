@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { ToDoList } from './ToDoList'
 import store from '../index'
 import PropTypes from 'prop-types'
@@ -44,20 +45,35 @@ class VisibleToDoList extends React.Component {
             state.visibilityFilter
           )
         }
-        onToDoClick={(id) =>
-          store.dispatch({
-            type: 'TOGGLE_TODO',
-            id
-          })
-
+        onToDoClick={
         }
       />
     );
   }
+
 }
 // context is opt-in for receiving components, so types need to be specified
 // specify which context the component will receive
 VisibleToDoList.contextTypes = {
   store: React.PropTypes.object
 }
-export default VisibleToDoList
+
+const mapStateToProps = (state) => {
+  return {
+    todos: getVisibleTodos(
+      state.todos,
+      state.visibilityFilter
+    );
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onToDoClick: (id) => {
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      })
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(VisibleToDoList)
