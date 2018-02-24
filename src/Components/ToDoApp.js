@@ -1,8 +1,9 @@
 import React from 'react';
 import store from '../index';
 import { ToDoList } from './ToDoList';
-import AddToDo from './AddToDo';
-import Footer from './Footer';
+import VisibleToDoList from './VisibleToDoList'
+import { Footer } from './Footer';
+import AddToDo from './AddToDo'
 
 const getVisibleTodos = (todos, filter) => {
   switch(filter){
@@ -19,30 +20,13 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 let nextToDoId = 0;
-//uses destructuring method to create variables from props
-const ToDoApp = ({  todos,
-  visibilityFilter }) => {
-    <AddToDo onAddClick={text =>
-      //click dispatches action and updates store's state
-      store.dispatch({
-        type: 'ADD_TODO',
-        id: nextToDoId++,
-        text
-      })
-    }/>
-    <ToDoList
-      //currently visible todos
-      todos={getVisibleTodos(
-        todos,
-        visibilityFilter
-      )}
-      // callback
-      onToDoClick={id => store.dispatch({
-        type: 'TOGGLE_TODO',
-        id
-      })} />
-    <Footer />
-}
+const ToDoApp = () =>
+// three container components which each subscribe to store
+    <div>
+      <AddToDo />
+      <VisibleToDoList />
+      <Footer />
+    </div>
 
 
 

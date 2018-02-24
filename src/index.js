@@ -8,16 +8,10 @@ import ToDoApp from './Components/ToDoApp';
 
 const store = createStore(todoApp);
 
-//will update dom in response to current application state
-const render = () => {
-  //spread operator passes down all state fields (todos and visibility filter values) as props
-  ReactDOM.render(<ToDoApp {...store.getState()}/>, document.getElementById('root'));
+
+ReactDOM.render(<ToDoApp store={store}/>, document.getElementById('root'));
 registerServiceWorker();
-}
 
 
-store.subscribe(render);
-//renders initial state
-render();
 
 export default store;

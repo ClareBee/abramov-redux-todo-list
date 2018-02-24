@@ -1,6 +1,7 @@
 import React from 'react';
+import store from '../index'
 
-const AddToDo = ({onAddClick}) => {
+const AddToDo = () => {
   //creates local variable
   let input;
   return (
@@ -8,8 +9,12 @@ const AddToDo = ({onAddClick}) => {
       <input ref={node => {
         input = node;
       }} />
-      <button onClick={() =>{  
-        onAddClick(input.value)
+      <button onClick={(nextToDoId) =>{
+        store.dispatch({
+          type: 'ADD_TODO',
+          id: nextToDoId++,
+          text: input.value
+        })
         input.value = '';
       }}>
       Add ToDo

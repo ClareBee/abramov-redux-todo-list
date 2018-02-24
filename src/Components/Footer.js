@@ -1,7 +1,8 @@
 import React from 'react';
+import FilterLink from './FilterLink'
 
 // presentation component only
-const Footer  = () => (
+export const Footer  = () => (
   <p>
     Show:
     {' '}
