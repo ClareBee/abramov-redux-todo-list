@@ -8,11 +8,7 @@ const AddToDo = ({onAddClick}) => {
       <input ref={node => {
         input = node;
       }} />
-      <button onClick={() =>{
-
-        //dispatches the add todo action - which calls the root reducer, which calls the todo reducer
-  
-        //empties input field after submission
+      <button onClick={() =>{  
         onAddClick(input.value)
         input.value = '';
       }}>

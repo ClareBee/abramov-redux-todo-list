@@ -1,11 +1,8 @@
 import React from 'react';
 import store from '../index';
-import { FilterLink } from './FilterLink';
 import { ToDoList } from './ToDoList';
 import AddToDo from './AddToDo';
 import Footer from './Footer';
-
-let nextToDoId = 0;
 
 const getVisibleTodos = (todos, filter) => {
   switch(filter){
@@ -21,10 +18,12 @@ const getVisibleTodos = (todos, filter) => {
       );
   }
 }
+let nextToDoId = 0;
 //uses destructuring method to create variables from props
 const ToDoApp = ({  todos,
   visibilityFilter }) => {
     <AddToDo onAddClick={text =>
+      //click dispatches action and updates store's state
       store.dispatch({
         type: 'ADD_TODO',
         id: nextToDoId++,
@@ -32,24 +31,17 @@ const ToDoApp = ({  todos,
       })
     }/>
     <ToDoList
+      //currently visible todos
       todos={getVisibleTodos(
         todos,
         visibilityFilter
       )}
+      // callback
       onToDoClick={id => store.dispatch({
         type: 'TOGGLE_TODO',
         id
       })} />
-    <Footer
-      //to highlight the active link
-      visibilityFilter={visibilityFilter}
-      onFilterClick={filter =>
-        store.dispatch({
-          type: 'SET_VISIBILITY_FILTER',
-          filter
-        })
-      }  
-    />
+    <Footer />
 }
 
 

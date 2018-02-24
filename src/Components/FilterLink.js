@@ -1,23 +1,37 @@
-import React from 'react';
-import store from '../index';
-export const FilterLink = ({
-  filter,
-  //currentFilter shows which filter has been selected and styles conditionally
-  currentFilter,
-  //children are the contents of the link
-  children,
-  onClick
-}) => {
-  //if filter matches the chosen filter, then an unclickable span is rendered rather than an a-tag
-  if(filter === currentFilter){
-    return <span>{children}</span>;
-  }
-  return (<a href='#'
-          onClick={e => {
-            e.preventDefault();
-            onClick(filter)
-          }}>
-          {children}
-        </a>
+import React from 'react'
+import Link from './Link'
+
+// container component for Link presentational component
+class FilterLink extends React.Component {
+  componentDidMount(){
+    // any time the store changes, the component will update
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate();
     );
-};
+  }
+  componentWillUnmount(){
+    //cleans up the subscription before unmounting
+    store.unsubscribe();
+  }
+  render(){
+    const props = this.props;
+    //gets redux state
+    const state = store.getState();
+    return (
+      <Link
+        active={
+          //compares own prop - passed from the footer - with redux state which represents the currently chosen visibility filter
+          props.filter === state.visibilityFilter
+        }
+        // now specify behaviour
+        onClick={() =>
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: props.filter
+          })
+        } >
+        {props.children}
+      </Link>
+    );
+  }
+}
