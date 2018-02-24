@@ -1,6 +1,6 @@
 import React from 'react';
 import ToDoList from './ToDoList'
-import { Footer } from './Footer';
+import { Footer } from '../Components/Footer';
 import AddToDo from './AddToDo'
 
 const ToDoApp = () => (

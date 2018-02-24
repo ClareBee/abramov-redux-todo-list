@@ -4,7 +4,7 @@ import './index.css';
 import { createStore } from 'redux';
 import registerServiceWorker from './registerServiceWorker';
 import todoApp from './Reducers';
-import ToDoApp from './Components/ToDoApp';
+import ToDoApp from './Containers/ToDoApp';
 import { Provider } from 'react-redux'
 
 const store = createStore(todoApp);

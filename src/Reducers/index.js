@@ -40,6 +40,7 @@ const todos = (state = [], action) => {
       return state;
   }
 };
+
 const visibilityFilter =  (
   state = 'SHOW_ALL',
   action
@@ -50,8 +51,8 @@ const visibilityFilter =  (
       default:
         return state;
     }
-
 };
+
 //root reducer which maps state name and reducers
 //keys correspond to fields of state object
 //values are reducers that are called to update corresponding state fields

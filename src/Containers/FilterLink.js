@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setVisibilityFilter } from '../Actions'
-import { Link } from './Link'
+import { Link } from '../Components/Link'
 
 // container component for Link presentational component
 class FilterLink extends React.Component {
@@ -33,30 +33,21 @@ class FilterLink extends React.Component {
         }
         // container specifies Link's behaviour
         onClick={() =>
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter: props.filter
-          })
+          store.dispatch(setVisibilityFilter(props.filter))
         } >
         {props.children}
       </Link>
     );
   }
 }
-const mapStateProps = (
-  state,
-  ownProps
-) => {
+const mapStateProps = (state, ownProps) => {
   return {
     active:
       ownProps.filter ===
       state.visibilityFilter
   };
 };
-const mapDispatchProps = (
-  dispatch,
-  ownProps
-) => {
+const mapDispatchProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
       dispatch(
@@ -65,6 +56,7 @@ const mapDispatchProps = (
     }
   };
 };
+
 export default FilterLink = connect(
   mapStateProps,
   mapDispatchProps
