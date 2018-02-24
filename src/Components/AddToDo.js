@@ -10,7 +10,7 @@ const AddToDo = ({ dispatch }) => {
   return (
     <div>
       <img src={logo} alt='redux logo'/>
-      <h1>Redux ToDoList</h1>
+      <h1>Redux ToDo List</h1>
       <a className='web-link' target='_blank' href="https://egghead.io/courses/getting-started-with-redux">Dan Abramov Tutorial</a>
       <input ref={node => {
         input = node;

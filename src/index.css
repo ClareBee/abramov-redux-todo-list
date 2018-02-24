@@ -28,6 +28,7 @@ img {
 }
 input {
   border: solid black 2px;
+  border-radius: 5px;
   box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.5);
   font-size: 30px;
   margin: 30px 0 30px 0;
@@ -37,13 +38,23 @@ button {
   box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.5);
   font-size: 20px;
   padding: 10px;
-  margin: 5px;
+  margin: 5px 5px 5px 10px;
+  border: 2px solid #201B20;
   border-radius: 50%;
   background-color: purple;
   color: white;
+}
+button:hover {
+  transform: scaleY(0.95);
+}
+button:focus {
+  outline:0;
 }
 
 .web-link {
   display: block;
   color: black;
+}
+.web-link:hover {
+  color: purple;
 }
