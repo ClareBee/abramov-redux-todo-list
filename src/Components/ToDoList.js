@@ -16,12 +16,7 @@ const Todo = ({
           'line-through' :
           'none'
     }}
-        className={
-        completed ?
-          'completed' :
-          ''
-    }
-        >
+      >
         {text}
     </li>
 );
@@ -30,15 +25,18 @@ const TodoList = ({
     todos,
     onTodoClick
     }) => (
-    <ul>
-        {todos.map(todo =>
-                <Todo
-                    key={todo.id}
-                    {...todo}
-                    onClick={() => onTodoClick(todo.id)}
-                    />
-        )}
-    </ul>
+    <div>
+
+      <ul className='to-do-list'>
+          {todos.map(todo =>
+                  <Todo
+                      key={todo.id}
+                      {...todo}
+                      onClick={() => onTodoClick(todo.id)}
+                      />
+          )}
+      </ul>
+    </div>
 );
 
 const getVisibleTodos = (todos,
