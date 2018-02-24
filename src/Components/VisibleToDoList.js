@@ -7,13 +7,13 @@ import store from '../index'
 class VisibleToDoList extends React.Component {
   componentDidMount(){
     // any time the store changes, the component will update
-    this.unsubscribe = store.subscribe(() =>
+    this.unsubscribe = this.props.store.subscribe(() =>
       this.forceUpdate()
     );
   }
   componentWillUnmount(){
     //cleans up the subscription before unmounting
-    store.unsubscribe();
+    this.props.store.unsubscribe();
   }
   getVisibleTodos = (todos, filter) => {
     switch(filter){
@@ -31,7 +31,7 @@ class VisibleToDoList extends React.Component {
   }
   render(){
     const props = this.props;
-    const state = store.getState();
+    const state = this.props.store.getState();
 
     return (
       <ToDoList
@@ -42,7 +42,7 @@ class VisibleToDoList extends React.Component {
           )
         }
         onToDoClick={(id) =>
-          store.dispatch({
+          this.props.store.dispatch({
             type: 'TOGGLE_TODO',
             id
           })

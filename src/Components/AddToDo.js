@@ -10,7 +10,7 @@ const AddToDo = () => {
         input = node;
       }} />
       <button onClick={(nextToDoId) =>{
-        store.dispatch({
+        this.props.store.dispatch({
           type: 'ADD_TODO',
           id: nextToDoId++,
           text: input.value

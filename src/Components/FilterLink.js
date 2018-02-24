@@ -1,24 +1,23 @@
 import React from 'react'
 import { Link } from './Link'
-import store from '../index'
 
 // container component for Link presentational component
 class FilterLink extends React.Component {
   componentDidMount(){
     // any time the store changes, the component will update
-    this.unsubscribe = store.subscribe(() =>
+    this.unsubscribe = this.props.store.subscribe(() =>
       this.forceUpdate()
     );
   }
   componentWillUnmount(){
     //cleans up the subscription before unmounting
-    store.unsubscribe();
+    this.props.store.unsubscribe();
   }
   render(){
     const props = this.props;
     //gets redux state
-    const state = store.getState();
-    
+    const state = this.props.store.getState();
+
     return (
       <Link
         //container provides appearance info
@@ -28,7 +27,7 @@ class FilterLink extends React.Component {
         }
         // container specifies Link's behaviour
         onClick={() =>
-          store.dispatch({
+          this.props.store.dispatch({
             type: 'SET_VISIBILITY_FILTER',
             filter: props.filter
           })

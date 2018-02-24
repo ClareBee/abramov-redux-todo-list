@@ -20,12 +20,12 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 let nextToDoId = 0;
-const ToDoApp = () =>
+const ToDoApp = ({ store }) =>
 // three container components which each subscribe to store
     <div>
-      <AddToDo />
-      <VisibleToDoList />
-      <Footer />
+      <AddToDo store={store}/>
+      <VisibleToDoList store={store}/>
+      <Footer store={store}/>
     </div>
 
 
