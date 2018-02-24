@@ -1,19 +1,21 @@
 import React from 'react'
 import { ToDoList } from './ToDoList'
 import store from '../index'
+import PropTypes from 'prop-types'
 
 // container components connect presentational components to the redux store
 // they specify the data/behaviour that they need
 class VisibleToDoList extends React.Component {
   componentDidMount(){
+    const { store } = this.context;
     // any time the store changes, the component will update
-    this.unsubscribe = this.props.store.subscribe(() =>
+    this.unsubscribe = store.subscribe(() =>
       this.forceUpdate()
     );
   }
   componentWillUnmount(){
     //cleans up the subscription before unmounting
-    this.props.store.unsubscribe();
+    store.unsubscribe();
   }
   getVisibleTodos = (todos, filter) => {
     switch(filter){
@@ -31,7 +33,8 @@ class VisibleToDoList extends React.Component {
   }
   render(){
     const props = this.props;
-    const state = this.props.store.getState();
+    const { store } = this.context;
+    const state = store.getState();
 
     return (
       <ToDoList
@@ -42,7 +45,7 @@ class VisibleToDoList extends React.Component {
           )
         }
         onToDoClick={(id) =>
-          this.props.store.dispatch({
+          store.dispatch({
             type: 'TOGGLE_TODO',
             id
           })
@@ -51,5 +54,10 @@ class VisibleToDoList extends React.Component {
       />
     );
   }
+}
+// context is opt-in for receiving components, so types need to be specified
+// specify which context the component will receive
+VisibleToDoList.contextTypes = {
+  store: React.PropTypes.object
 }
 export default VisibleToDoList

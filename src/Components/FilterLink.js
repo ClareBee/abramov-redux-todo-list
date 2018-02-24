@@ -4,19 +4,23 @@ import { Link } from './Link'
 // container component for Link presentational component
 class FilterLink extends React.Component {
   componentDidMount(){
+    //access is enabled by Provider
+    const { store } = this.context;
     // any time the store changes, the component will update
-    this.unsubscribe = this.props.store.subscribe(() =>
+    this.unsubscribe = store.subscribe(() =>
       this.forceUpdate()
     );
   }
   componentWillUnmount(){
+    const { store } = this.context
     //cleans up the subscription before unmounting
-    this.props.store.unsubscribe();
+    store.unsubscribe();
   }
   render(){
     const props = this.props;
+    const { store } = this.context;
     //gets redux state
-    const state = this.props.store.getState();
+    const state = store.getState();
 
     return (
       <Link
@@ -27,7 +31,7 @@ class FilterLink extends React.Component {
         }
         // container specifies Link's behaviour
         onClick={() =>
-          this.props.store.dispatch({
+          store.dispatch({
             type: 'SET_VISIBILITY_FILTER',
             filter: props.filter
           })
@@ -36,5 +40,8 @@ class FilterLink extends React.Component {
       </Link>
     );
   }
+}
+FilterLink.contextTypes = {
+  store: React.PropTypes.object
 }
 export default FilterLink

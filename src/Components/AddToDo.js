@@ -1,16 +1,17 @@
 import React from 'react';
-import store from '../index'
 
-const AddToDo = () => {
+// second argument is context - destructed here into store variable
+const AddToDo = (props, context) => {
   //creates local variable
   let input;
+  const { store } = this.context;
   return (
     <div>
       <input ref={node => {
         input = node;
       }} />
       <button onClick={(nextToDoId) =>{
-        this.props.store.dispatch({
+        store.dispatch({
           type: 'ADD_TODO',
           id: nextToDoId++,
           text: input.value
@@ -21,5 +22,8 @@ const AddToDo = () => {
       </button>
     </div>
   );
+}
+AddToDo.contextTypes = {
+  store: React.PropTypes.object
 }
 export default AddToDo;
