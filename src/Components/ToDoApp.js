@@ -1,5 +1,5 @@
 import React from 'react';
-import VisibleToDoList from './VisibleToDoList'
+import ToDoList from './ToDoList'
 import { Footer } from './Footer';
 import AddToDo from './AddToDo'
 
@@ -8,11 +8,9 @@ const ToDoApp = () => (
 // store will be accessible via context, thanks to Provider
     <div>
       <AddToDo />
-      <VisibleToDoList />
+      <ToDoList />
       <Footer />
     </div>
 )
-
-
 
 export default ToDoApp;

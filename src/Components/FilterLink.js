@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { setVisibilityFilter } from '../Actions'
 import { Link } from './Link'
 
 // container component for Link presentational component
@@ -41,7 +43,29 @@ class FilterLink extends React.Component {
     );
   }
 }
-FilterLink.contextTypes = {
-  store: React.PropTypes.object
-}
-export default FilterLink
+const mapStateProps = (
+  state,
+  ownProps
+) => {
+  return {
+    active:
+      ownProps.filter ===
+      state.visibilityFilter
+  };
+};
+const mapDispatchProps = (
+  dispatch,
+  ownProps
+) => {
+  return {
+    onClick: () => {
+      dispatch(
+        setVisibilityFilter(ownProps.filter)
+      );
+    }
+  };
+};
+export default FilterLink = connect(
+  mapStateProps,
+  mapDispatchProps
+)(Link);

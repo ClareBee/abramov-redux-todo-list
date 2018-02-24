@@ -1,21 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../Actions'
 
 // second argument is context - destructed here into store variable
-const AddToDo = (props, context) => {
+const AddToDo = ({ dispatch }) => {
   //creates local variable
   let input;
-  const { store } = this.context;
   return (
     <div>
       <input ref={node => {
         input = node;
       }} />
       <button onClick={(nextToDoId) =>{
-        store.dispatch({
-          type: 'ADD_TODO',
-          id: nextToDoId++,
-          text: input.value
-        })
+        dispatch(addTodo(input.value))
         input.value = '';
       }}>
       Add ToDo
@@ -23,7 +20,5 @@ const AddToDo = (props, context) => {
     </div>
   );
 }
-AddToDo.contextTypes = {
-  store: React.PropTypes.object
-}
-export default AddToDo;
+
+export default connect()(AddToDo);
