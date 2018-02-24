@@ -10,7 +10,7 @@ export const Link = ({
   }
 
   return (
-    <a href='#'
+    <a className='filter-link' href='#'
        onClick={e => {
          e.preventDefault();
          onClick();

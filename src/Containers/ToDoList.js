@@ -8,7 +8,7 @@ const TodoList = ({
     todos,
     onTodoClick
     }) => (
-    <div>
+    <div className='list-container'>
 
       <ul className='to-do-list'>
           {todos.map(todo =>

@@ -6,6 +6,7 @@ export const Todo = ({
     text
     }) => (
     <li
+        className={completed ? 'list-item' : 'none'}
         onClick={onClick}
         style={{
       textDecoration:
